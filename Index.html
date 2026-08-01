@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Substitute Goalie Request</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #0ea5e9;
+      --accent-hover: #0284c7;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+    header p { opacity: 0.85; font-size: 0.95rem; }
+    main {
+      flex: 1;
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08);
+      padding: 2rem;
+    }
+    .card h2 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+    .card > p { color: var(--muted); margin-bottom: 1.75rem; font-size: 0.95rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+    label .required { color: var(--error); }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+    button[type="submit"] {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    button[type="submit"]:hover { background: var(--accent-hover); }
+    button[type="submit"]:disabled { opacity: 0.65; cursor: not-allowed; }
+    .status { margin-top: 1.25rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.95rem; display: none; }
+    .status.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .status.error { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    footer { text-align: center; padding: 1.5rem 1rem; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Substitute Goalie Request</h1>
+    <p>Need a goalie for your game or practice? Submit a request below.</p>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Request Form</h2>
+      <p>Fill out the details and we’ll get back to you as soon as possible.</p>
+      <form id="goalie-form" action="https://formspree.io/f/mykrqbgk" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="Jane Smith" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="team">Team / Organization <span class="required">*</span></label>
+          <input type="text" id="team" name="team" required placeholder="e.g. City Hawks U16" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="date">Date Needed <span class="required">*</span></label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="location">Location / Rink <span class="required">*</span></label>
+          <input type="text" id="location" name="location" required placeholder="Main Arena, 123 Ice St" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="sport">Sport</label>
+            <select id="sport" name="sport">
+              <option value="Hockey">Hockey</option>
+              <option value="Soccer / Football">Soccer / Football</option>
+              <option value="Lacrosse">Lacrosse</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="level">Skill Level Needed</label>
+            <select id="level" name="level">
+              <option value="Any">Any</option>
+              <option value="Beginner / Rec">Beginner / Rec</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced / Competitive">Advanced / Competitive</option>
+              <option value="Elite / Pro">Elite / Pro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="duration">Approximate Duration</label>
+          <input type="text" id="duration" name="duration" placeholder="e.g. 1.5 hours, full game" />
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional Details</label>
+          <textarea id="notes" name="notes" placeholder="Jersey size needed, specific requirements, contact preferences, etc."></textarea>
+        </div>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <button type="submit" id="submit-btn">Submit Request</button>
+        <div id="form-status" class="status"></div>
+      </form>
+    </div>
+  </main>
+  <footer>Hosted on GitHub Pages</footer>
+  <script>
+    const form = document.getElementById('goalie-form');
+    const status = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'status';
+      status.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          status.className = 'status success';
+          status.textContent = 'Request submitted successfully! We’ll be in touch soon.';
+          form.reset();
+        } else {
+          const data = await response.json().catch(() => ({}));
+          status.className = 'status error';
+          status.text
